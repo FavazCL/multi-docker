@@ -4,21 +4,21 @@ services:
   - docker
 
 before_install:
-  - docker build -t felipe/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t favaz/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true felipe/react-test npm test
+  - docker run -e CI=true favaz/react-test npm test
 
 after_success:
-  - docker build -t felipe/multi-client ./client
-  - docker build -t felipe/multi-nginx ./nginx
-  - docker build -t felipe/multi-server ./server
-  - docker build -t felipe/multi-worker ./worker
+  - docker build -t favaz/multi-client ./client
+  - docker build -t favaz/multi-nginx ./nginx
+  - docker build -t favaz/multi-server ./server
+  - docker build -t favaz/multi-worker ./worker
   
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push felipe/multi-client
-  - docker push felipe/multi-nginx
-  - docker push felipe/multi-server
-  - docker push felipe/multi-worker
+  - docker push favaz/multi-client
+  - docker push favaz/multi-nginx
+  - docker push favaz/multi-server
+  - docker push favaz/multi-worker
